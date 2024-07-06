@@ -203,7 +203,7 @@ class Ui_MainWindow(object):
                 error_divide.exec_()
 
             elif self.label_result.text().count('*') > 2:
-                some_error = QMessageBox
+                some_error = QMessageBox()
                 some_error.setWindowTitle('Ошибка')
                 some_error.setText('Неизвесная ошибка')
                 some_error.setIcon(QMessageBox.Warning)
