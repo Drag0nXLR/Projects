@@ -229,7 +229,7 @@ class Ui_MainWindow(object):
 
     def popup_action(self, btn):
         if btn.text() == 'Ok':
-            print('Print Ok')
+            pass
         elif btn.text() == 'Reset':
             self.label_result.setText('')
             self.is_equal = False
