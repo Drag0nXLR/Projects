@@ -1,75 +1,95 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-  QPushButton, QRadioButton, QHBoxLayout, QVBoxLayout, QLabel, QGroupBox, QSpinBox, QButtonGroup
+    QPushButton, QRadioButton, QVBoxLayout, QHBoxLayout, QLabel, 
+    QGroupBox, QButtonGroup, QSpinBox
 )
 
 menu_btn = QPushButton("Меню")
-rest_btn = QPushButton("Відпочити")
-ans_btn = QPushButton("Відповісти")
+rest_button = QPushButton("Відпочити")
+answer_btn = QPushButton("Відповісти")
 
-q_label = QLabel('Запитання')
+question_lbl = QLabel("Запитання")
+time_lbl = QLabel("хвилин")
 
-time_label = QLabel('Хвилин')
-
-radio_btn1 = QRadioButton("1")
-radio_btn2 = QRadioButton("2")
-radio_btn3 = QRadioButton("3")
-radio_btn4 = QRadioButton("4")
+radio1 = QRadioButton("1")
+radio2 = QRadioButton("2")
+radio3 = QRadioButton("3")
+radio4 = QRadioButton("4")
 
 timer_box = QSpinBox()
 timer_box.setValue(30)
 
-radio_g_box = QGroupBox('Варіанти:')
-radio_g = QButtonGroup()
+radio_group_box = QGroupBox("Варіанти відповідей")
+radio_group = QButtonGroup()
+radio_group.addButton(radio1)
+radio_group.addButton(radio2)
+radio_group.addButton(radio3)
+radio_group.addButton(radio4)
 
-radio_g.addButton(radio_btn1)
-radio_g.addButton(radio_btn2)
-radio_g.addButton(radio_btn3)
-radio_g.addButton(radio_btn4)
+layout_ans_H = QHBoxLayout()
+layout_ans_V1 = QVBoxLayout()
+layout_ans_V2 = QVBoxLayout()
 
-layout_ans1 = QHBoxLayout()
-layout_ans2 = QVBoxLayout()
-layout_ans3 = QVBoxLayout()
+layout_ans_V1.addWidget(radio1)
+layout_ans_V1.addWidget(radio2)
+layout_ans_V2.addWidget(radio3)
+layout_ans_V2.addWidget(radio4)
+layout_ans_H.addLayout(layout_ans_V1)
+layout_ans_H.addLayout(layout_ans_V2)
 
-layout_ans2.addWidget(radio_btn1)
-layout_ans2.addWidget(radio_btn2)
+radio_group_box.setLayout(layout_ans_H)
 
-layout_ans3.addWidget(radio_btn3)
-layout_ans3.addWidget(radio_btn4)
-
-layout_ans1.addLayout(layout_ans2)
-layout_ans1.addLayout(layout_ans3)
-
-radio_g_box.setLayout(layout_ans1)
-
-result_layout = QVBoxLayout()
-result_lbl = QLabel('')
-correct_lbl = QLabel('')
+layout_res = QVBoxLayout()
+result_lbl = QLabel("")
+correct_lbl = QLabel("")
 ans_group_box = QGroupBox()
 
-result_layout.addWidget(result_lbl, alignment=(Qt.AlignTop | Qt.AlignLeft))
-result_layout.addWidget(result_lbl, alignment=Qt.AlignCenter, stretch=2)
-
-ans_group_box.setLayout(result_layout)
+layout_res.addWidget(result_lbl, alignment=(Qt.AlignTop | Qt.AlignLeft))
+layout_res.addWidget(correct_lbl, alignment=Qt.AlignCenter, stretch = 2)
+ans_group_box.setLayout(layout_res)
 ans_group_box.hide()
 
-main_layout_h = QHBoxLayout()
-main_layout_h.addWidget(menu_btn, alignment=Qt.AlignLeft)
-main_layout_h.addWidget(rest_btn, alignment=Qt.AlignRight)
-main_layout_h.addWidget(timer_box, alignment=Qt.AlignRight)
-main_layout_h.addWidget(time_label, alignment=Qt.AlignRight)
+main_layout_H1 = QHBoxLayout()
+main_layout_H1.addWidget(menu_btn, alignment=Qt.AlignLeft)
+main_layout_H1.addWidget(rest_button, alignment=Qt.AlignRight)
+main_layout_H1.addWidget(timer_box, alignment=Qt.AlignRight)
+main_layout_H1.addWidget(time_lbl, alignment=Qt.AlignRight)
 
-main_layout2_h = QHBoxLayout()
-main_layout2_h.addWidget(q_label, stretch=2)
+main_layout_H2 = QHBoxLayout()
+main_layout_H2.addWidget(question_lbl, stretch=2)
 
-main_layout3_h = QHBoxLayout()
-main_layout3_h.addWidget(radio_g_box)
+main_layout_H3 = QHBoxLayout()
+main_layout_H3.addWidget(radio_group_box)
+main_layout_H3.addWidget(ans_group_box)
 
-main_layout4_h = QHBoxLayout()
-main_layout4_h.addWidget(ans_btn)
+main_layout_H4 = QHBoxLayout()
+main_layout_H4.addWidget(answer_btn)
 
-main_layout = QVBoxLayout()
-main_layout.addLayout(main_layout_h)
-main_layout.addLayout(main_layout2_h)
-main_layout.addLayout(main_layout3_h)
-main_layout.addLayout(main_layout4_h)
+main_vertical_layout = QVBoxLayout()
+#1
+main_vertical_layout.addLayout(main_layout_H1)
+main_vertical_layout.addLayout(main_layout_H2)
+main_vertical_layout.addLayout(main_layout_H3)
+main_vertical_layout.addLayout(main_layout_H4)
+
+# У ФАЙЛІ memo_card_layout.py:
+# 1. Опиши дві функції show_result () і show_question (). При натисканні на кнопку "Ок" буде викликатися show_result (), що відображає правильну відповідь, а при натисканні на кнопку ще раз - викликатися show_question (), що показує наступне питання.
+# 2. Не забудь змінити напис на кнопці. При відповіді на питання і перехід до результатів напис на кнопці повинна змінюватися з "Ок" на "Наступне питання".
+
+def show_result():
+  radio_group_box.hide()
+  ans_group_box.show()
+  answer_btn.setText('Наступне питання')
+
+def show_question():
+  radio_group_box.show()
+  ans_group_box.hide()
+  answer_btn.setText('Відповісти')
+
+def switch_screen():
+  if answer_btn.text() == 'Відповісти':
+    show_result()
+  elif answer_btn.text() == 'Наступне питання':
+    show_question()
+
+answer_btn.clicked.connect(switch_screen)
