@@ -19,13 +19,6 @@ answer = 'apple'
 
 q_variants = shuffle(start_variants)
 
-question_lbl.setText(start_question)
-
-radio1.setText(start_variants[0])
-radio2.setText(start_variants[1])
-radio3.setText(start_variants[2])
-radio4.setText(start_variants[3])
-
 def check_result(answer, variants, result):
     print('check result')
 
