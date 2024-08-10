@@ -23,20 +23,20 @@ edit_layout_h1 = QHBoxLayout()
 list = QListView()
 edit_layout_h1.addWidget(list)
 
-layout_form = QFormLayout()
+form_layout = QFormLayout()
 question_text = QLineEdit('')
 correct_answer_text = QLineEdit('')
 wrong_answer1_text = QLineEdit('')
 wrong_answer2_text = QLineEdit('')
 wrong_answer3_text = QLineEdit('')
 
-layout_form.addRow("Запитання:", question_text)
-layout_form.addRow("Правильна відповідь:", correct_answer_text)
-layout_form.addRow("Неправильна відповідь 1:", wrong_answer1_text)
-layout_form.addRow("Неправильна відповідь 2:", wrong_answer2_text)
-layout_form.addRow("Неправильна відповідь 3:", wrong_answer3_text)
+form_layout.addRow("Запитання:", question_text)
+form_layout.addRow("Правильна відповідь:", correct_answer_text)
+form_layout.addRow("Неправильна відповідь 1:", wrong_answer1_text)
+form_layout.addRow("Неправильна відповідь 2:", wrong_answer2_text)
+form_layout.addRow("Неправильна відповідь 3:", wrong_answer3_text)
 
-edit_layout_h1.addLayout(layout_form)
+edit_layout_h1.addLayout(form_layout)
 
 edit_main_layout.addLayout(edit_layout_h1)
 
